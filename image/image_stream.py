@@ -30,6 +30,8 @@ class ImageStream(object):
         cols = self.image.size()[0]
         for i in range(self.get_available_bytes()):
             move = i * ImageStream.STEP
+            if move % cols == 0:
+                return cols - 1, move // cols - 1
             row_index = move // cols
-            col_index = move % cols
+            col_index = move % cols - 1
             yield col_index, row_index
