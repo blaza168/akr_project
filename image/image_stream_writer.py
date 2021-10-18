@@ -47,9 +47,6 @@ class ImageStreamWriter(ImageStream):
 
         self.image.save("embedded." + self.extension)
 
-    def __check_end_sequence_collision(self):
-        pass
-
     def __extract_extension(self, path):
         split = path.split(".")
         return split[len(split) - 1]
