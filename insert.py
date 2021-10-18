@@ -1,7 +1,7 @@
 from exception.EndSequenceCollisionException import EndSequenceCollisionException
 from exception.LenException import LenException
-from image import ImageStreamWriter
 from os.path import exists
+from image import get_writer
 
 filename = input("Enter filename: ")
 
@@ -11,7 +11,7 @@ if not exists(filename):
 
 bytes = input("Enter text to be inserted into image: ").encode("ASCII")
 
-writer = ImageStreamWriter(filename)
+writer = get_writer(filename)
 
 try:
     writer.write(bytes)

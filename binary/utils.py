@@ -21,3 +21,7 @@ def read_by_2_bits(bytes):
         str = "0" * (8 - len(str)) + str
         for i in range(0, 8, 2):
             yield int(str[i: i+2], 2)
+
+def extract_extension(path):
+    split = path.split(".")
+    return split[len(split) - 1]

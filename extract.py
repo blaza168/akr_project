@@ -1,10 +1,11 @@
-from image import ImageStreamReader
 from os.path import exists
+
+from image.factory import get_reader
 
 filename = input("Enter filename of image: ")
 
 if exists(filename):
-    reader = ImageStreamReader(filename)
+    reader = get_reader(filename)
     text = reader.read()
 
     print("Text extracted from image: " + text.decode("ASCII"))

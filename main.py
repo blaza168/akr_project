@@ -1,5 +1,5 @@
-from image.image_stream_writer import ImageStreamWriter
-from image.image_stream_reader import ImageStreamReader
+from image.png.image_stream_writer import ImageStreamWriter
+from image.png.image_stream_reader import ImageStreamReader
 
 text = input("Enter text to be embedded into image: ").encode("ASCII")
 

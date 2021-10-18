@@ -4,3 +4,5 @@ venv/
 
 *.png
 *.jpg
+
+test*.py

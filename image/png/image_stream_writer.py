@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 from exception.EndSequenceCollisionException import EndSequenceCollisionException
 from exception.LenException import LenException
-from image.image_stream import ImageStream
+from image.png.image_stream import ImageStream
 from binary.utils import set_last_2_bits, read_by_2_bits
 
 
@@ -10,7 +10,6 @@ class ImageStreamWriter(ImageStream):
 
     def __init__(self, path):
         super().__init__(path)
-        self.extension = self.__extract_extension(path)
 
     def write(self, text):
         """
@@ -45,9 +44,5 @@ class ImageStreamWriter(ImageStream):
             new_pixel = (r_embedded, g_embedded, b_embedded)
             self.pixels[col, row] = new_pixel
 
-        self.image.save("embedded." + self.extension)
-
-    def __extract_extension(self, path):
-        split = path.split(".")
-        return split[len(split) - 1]
+        self.image.save("embedded.png")
 
