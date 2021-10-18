@@ -5,6 +5,6 @@ class ImageJPGWriter(object):
 
     def write(self, bytes):
         output_img = open("output.jpg", "wb")
-        output_img.write(open("berlin.jpg", "rb").read())
+        output_img.write(open(self.filename, "rb").read())
         output_img.write(bytes)
         output_img.close()
