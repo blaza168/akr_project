@@ -1,4 +1,7 @@
 from __future__ import absolute_import
+
+from exception.EndSequenceCollisionException import EndSequenceCollisionException
+from exception.LenException import LenException
 from image.image_stream import ImageStream
 from binary.utils import set_last_2_bits, read_by_2_bits
 
@@ -14,6 +17,12 @@ class ImageStreamWriter(ImageStream):
         :param bytes: Bytes that will be included into image
         """
         bytes = bytearray(text)
+
+        if len(text) > self.get_available_bytes():
+            raise LenException(self.get_available_bytes())
+        if self._end_sequence in bytes:
+            raise EndSequenceCollisionException(self._end_sequence)
+
         for end_seq in ImageStream.END_SEQUENCE:
             bytes.append(end_seq)
         bits_gen = read_by_2_bits(bytes)
@@ -37,6 +46,9 @@ class ImageStreamWriter(ImageStream):
             self.pixels[col, row] = new_pixel
 
         self.image.save("embedded." + self.extension)
+
+    def __check_end_sequence_collision(self):
+        pass
 
     def __extract_extension(self, path):
         split = path.split(".")

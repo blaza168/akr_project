@@ -37,7 +37,11 @@ class ImageStreamReader(ImageStream):
             return True
 
         def get_bytes(self):
-            return self.bytes[:-2]
+            """
+            Should be called after "finished" function returns True
+            :return: Bytes red from image.
+            """
+            return self.bytes[:-len(ImageStream.END_SEQUENCE)]
 
     def read(self):
         """

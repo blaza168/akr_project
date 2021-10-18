@@ -4,7 +4,7 @@ from PIL import Image
 class ImageStream(object):
 
     STEP = 3
-    END_SEQUENCE = [0b11100001, 0b01001001]  # Sequence for text termination. ROUND TO BYTE!!!
+    END_SEQUENCE = [0b11100001, 0b01001001, 0b11101110]  # Sequence for text termination. ROUND TO BYTE!!!
 
     def __init__(self, path):
         self.path = path
@@ -20,8 +20,12 @@ class ImageStream(object):
         img_size = self.image.size
         pixel_count = img_size[0] * img_size[1]
         available_pixels = pixel_count // ImageStream.STEP
-        available_bits = available_pixels * 6 - len(ImageStream.END_SEQUENCE)
-        return available_bits // 8
+        available_bits = available_pixels * 6
+        return available_bits // 8 - len(ImageStream.END_SEQUENCE)
+
+    @property
+    def _end_sequence(self):
+        return bytearray(ImageStream.END_SEQUENCE)
 
     def _pixel_positions(self):
         """
